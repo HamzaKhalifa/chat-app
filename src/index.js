@@ -10,6 +10,7 @@ const {
     removeUser,
     getUser,
     getUsersInRoom,
+    getRooms
 } = require('./utils/users');
 
 const app = express();
@@ -86,7 +87,11 @@ io.on('connection', (socket) => {
             });
         }
     });
-})
+});
+
+app.get('/rooms', (req, res) => {
+    res.send(getRooms());
+});
 
 const PORT = process.env.PORT || 3000;
 server.listen(PORT, () => {

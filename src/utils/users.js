@@ -21,8 +21,7 @@ const addUser = ({ id, username, room }) => {
     const existingUser = users.find((user) => {
         return user.room === room && user.username === username;
     });
-
-    console.log(users);
+    
     // Validate username
     if (existingUser) {
         return { error: 'Username is already in use' }
@@ -52,9 +51,20 @@ const getUsersInRoom = (room) => {
     return users.filter(user => user.room === room);
 }
 
+const getRooms = () => {
+    const rooms = [];
+    users.forEach(user => {
+        if (rooms.indexOf(user.room) === -1)
+            rooms.push(user.room);
+    })
+
+    return rooms;
+}
+
 module.exports = {
     addUser, 
     removeUser,
     getUser,
     getUsersInRoom,
+    getRooms
 }
